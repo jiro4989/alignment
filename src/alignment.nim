@@ -1,26 +1,40 @@
 ## This module provides functions to align texts.
-## The procedures consider multibyte strings.
+## The procedures consider multibyte strings (ex: あいうえお, 漢字).
 ##
-## Usage example
-## =============
+## Basic usage
+## ===========
 ##
+## Show example that aligns text that has half width string and full width
+## string.
 
 runnableExamples:
   import alignment
 
-  let s = @["abcde", "あいうえお"]
-  for line in s.alignCenter:
-    echo "<", line, ">"
+  let s = @["abcde", "あいうえお", "ABC", "あ", "123456789"]
+  let aligned = s.alignCenter
+  doAssert aligned[0] == "  abcde   "
+  doAssert aligned[1] == "あいうえお"
+  doAssert aligned[2] == "   ABC    "
+  doAssert aligned[3] == "    あ    "
+  doAssert aligned[4] == "123456789 "
 
+  for line in aligned:
+    echo "| ", line, " |"
+  
   ## Output:
-  ## <  abcde   >
-  ## <あいうえお>
+  ## |   abcde    |
+  ## | あいうえお |
+  ## |    ABC     |
+  ## |     あ     |
+  ## | 123456789  |
 
 import eastasianwidth
 import strutils
 from sequtils import mapIt
 
 proc alignLeft*(lines: openArray[string], pad = " "): seq[string] =
+  ## Aligns strings with padding, so that it is of max look length of strings.
+  ## Padding string are added before resulting in left alignment. 
   runnableExamples:
     let aligned = @["abcde", "あいうえお"].alignLeft
     doAssert aligned[0] == "abcde     "
@@ -38,7 +52,9 @@ proc alignLeft*(lines: openArray[string], pad = " "): seq[string] =
       s.add pads
     result.add s
 
-proc alignCenter*(lines: openArray[string], pad = " ", marginLeft = 0, marginRight = 0): seq[string] =
+proc alignCenter*(lines: openArray[string], pad = " "): seq[string] =
+  ## Aligns strings with padding, so that it is of max look length of strings.
+  ## Padding string are added before and after resulting in center alignment. 
   runnableExamples:
     let aligned = @["abcde", "あいうえお"].alignCenter
     doAssert aligned[0] == "  abcde   "
@@ -60,6 +76,8 @@ proc alignCenter*(lines: openArray[string], pad = " ", marginLeft = 0, marginRig
     result.add s
 
 proc alignRight*(lines: openArray[string], pad = " "): seq[string] =
+  ## Aligns strings with padding, so that it is of max look length of strings.
+  ## Padding string are added after resulting in right alignment. 
   runnableExamples:
     let aligned = @["abcde", "あいうえお"].alignRight
     doAssert aligned[0] == "     abcde"

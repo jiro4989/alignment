@@ -1,6 +1,13 @@
 import unittest
 import alignment, strutils
 
+doAssert "a".len == 1
+doAssert "あ".len == 3
+doAssert "a".alignLeft(5) == "a    "
+doAssert "あ".alignLeft(5) == "あ  "
+doAssert "a".alignLeft(5).len == 5
+doAssert "あ".alignLeft(5).len == 5
+
 doAssert "abcd".alignLeft(6) == "abcd  "
 doAssert "abcd".align(6) == "  abcd"
 doAssert "あい".alignLeft(6) == "あい" # あ == 3byte

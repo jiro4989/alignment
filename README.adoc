@@ -1,24 +1,58 @@
 :toc: left
 :sectnums:
 
-= rect
+= alignment
 
-image:https://travis-ci.org/jiro4989/rect.svg?branch=master["Build Status", link="https://travis-ci.org/jiro4989/rect"]
-image:https://ci.appveyor.com/api/projects/status/eex856fcv9lfgbjr?svg=true["Build status", link="https://ci.appveyor.com/project/jiro4989/rect"]
+alignment is a library to align strings.
+The procedures consider multibyte strings (ex: あいうえお, 漢字).
 
-rect is a command to crop/paste rectangle text.
+== ライブラリ説明
+
+テキストを単純に `strutils.align` などでパディングした場合、
+ターミナルで確認した際に、揃い位置がずれることがある。
+これは半角アルファベットとひらがななどを含むマルチバイト文字で、
+文字のバイトサイズが異なることに起因する。
+
+以下の例を確認しよう。
+
+この例では、"a"の長さが1、"あ"の長さが3であることがわかる。
+`len` プロシージャは文字の数ではなく、文字のバイト長であるを返す。
+
+同様に、 `strutils.alignLeft` も文字列のパディングをバイト長を基準に行う。
+よって、シングルバイト文字のみのテキストとマルチバイト文字を含む文字列に対して
+alignを行った場合、以下のような結果になる。
+
+見ての通り、バイト長に関しては両者とも一致するものの、文字列の見た目上のパディン
+グについては不揃いになってします。これらはWebブラウザのレンダリングの関係で
+不揃いであることがわかりにくくなっているものの、これの検証を
+ターミナル上で実施し、ターミナル上で等幅フォントを使用して確認したとき、
+それは顕著にわかるだろう。
+
+本ライブラリでは、このTUI上で確認したときの位置揃えの不一致の問題を解消すること
+を目的とする。
+
+[source,nim]
+----
+import strutils
+
+doAssert "a".len == 1
+doAssert "あ".len == 3
+doAssert "a".alignLeft(5) == "a    "
+doAssert "あ".alignLeft(5) == "あ  "
+doAssert "a".alignLeft(5).len == 5
+doAssert "あ".alignLeft(5).len == 5
+----
 
 == Development
 
 nim -v
 
-  Nim Compiler Version 0.19.4 [Linux: amd64]
-  Compiled at 2019-02-01
+  Nim Compiler Version 0.19.6 [Linux: amd64]
+  Compiled at 2019-05-10
   Copyright (c) 2006-2018 by Andreas Rumpf
 
-  git hash: b6d96cafc8bcad1f3d32f2910b25cd11a93f7751
+  git hash: c6f601d48ec81e0d6e052ba0d19a195b55cc68f2
   active boot switches: -d:release
-
 
 nimble -v
 
@@ -28,69 +62,33 @@ nimble -v
 
 == Usage
 
-[source,bash]
+[source,nim]
 ----
-% cat tests/data1.txt 
-1234
-あいうえお
-6
+import alignment
 
-% rect crop -x 2 -W 10 -H 2 tests/data1.txt
-34
-いうえお
+let s = @["abcde", "あいうえお", "ABC", "あ", "123456789"]
+let aligned = s.alignCenter
+doAssert aligned[0] == "  abcde   "
+doAssert aligned[1] == "あいうえお"
+doAssert aligned[2] == "   ABC    "
+doAssert aligned[3] == "    あ    "
+doAssert aligned[4] == "123456789 "
 
-% cat tests/data1.txt | rect crop -x 2 -W 10 -H 2
-34
-いうえお
+for line in aligned:
+  echo "| ", line, " |"
 
-% rect paste -x 6 -y 1 <(seq 4 | xargs -I@ bash -c 'seq 5 | xargs -I__ echo -n @; echo') tests/data1.txt
-1234
-あいう11111
-6     22222
-      33333
-      44444
-
-% seq 4 | xargs -I@ bash -c 'seq 5 | xargs -I__ echo -n @; echo' | rect paste -x 1 -y 2 tests/data1.txt
-1234
-あいうえお
-611111
- 22222
- 33333
- 44444
+## Output:
+## |   abcde    |
+## | あいうえお |
+## |    ABC     |
+## |     あ     |
+## | 123456789  |
 ----
 
 == Install
 
 [source,bash]
-nimble install rect
-
-or
-
-Download binary from https://github.com/jiro4989/rect/releases[Releases].
-
-== Help
-
-[source]
-----
-rect is a command to crop/paste rectangle text
-
-Usage:
-  rect crop  [options]
-  rect crop  [options] <srcfile>
-  rect paste [options] <dstfile>
-  rect paste [options] <srcfile> <dstfile>
-  rect (-h | --help)
-  rect (-v | --version)
-
-Options:
-  -h --help               Show this screen
-  -v --version            Show version
-  -X --debug              Debug mode ON
-  -x <x>                  Cropping/pasting position X [default: 0]
-  -y <y>                  Cropping/pasting position Y [default: 0]
-  -W --width <width>      Cropping width              [default: 1]
-  -H --height <height>    Cropping height             [default: 1]
-----
+nimble install alignment
 
 == License
 
@@ -98,4 +96,4 @@ MIT
 
 == Document
 
-* https://jiro4989.github.io/rect/rect.html
+* https://jiro4989.github.io/alignment/alignment.html

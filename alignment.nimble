@@ -2,7 +2,7 @@
 
 version       = "1.0.0"
 author        = "jiro4989"
-description   = "alignment is a library"
+description   = "alignment is a library to align strings."
 license       = "MIT"
 srcDir        = "src"
 
