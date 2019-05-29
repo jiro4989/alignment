@@ -1,7 +1,3 @@
 /bin/
 /dist/
-tests/test1
-tests/tcrop
-tests/tpaste
-tests/tutil
-tests/tclassifiedstring
+tests/talign
