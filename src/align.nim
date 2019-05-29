@@ -21,6 +21,11 @@ import strutils
 from sequtils import mapIt
 
 proc alignLeft*(lines: openArray[string], pad = " "): seq[string] =
+  runnableExamples:
+    let aligned = @["abcde", "あいうえお"].alignLeft
+    doAssert aligned[0] == "abcde     "
+    doAssert aligned[1] == "あいうえお"
+
   let lineMaxWidth = lines.mapIt(it.stringWidth).max
   for line in lines:
     let
@@ -34,6 +39,11 @@ proc alignLeft*(lines: openArray[string], pad = " "): seq[string] =
     result.add s
 
 proc alignCenter*(lines: openArray[string], pad = " ", marginLeft = 0, marginRight = 0): seq[string] =
+  runnableExamples:
+    let aligned = @["abcde", "あいうえお"].alignCenter
+    doAssert aligned[0] == "  abcde   "
+    doAssert aligned[1] == "あいうえお"
+
   let lineMaxWidth = lines.mapIt(it.stringWidth).max
   for line in lines:
     let diff = lineMaxWidth - line.stringWidth
@@ -50,6 +60,11 @@ proc alignCenter*(lines: openArray[string], pad = " ", marginLeft = 0, marginRig
     result.add s
 
 proc alignRight*(lines: openArray[string], pad = " "): seq[string] =
+  runnableExamples:
+    let aligned = @["abcde", "あいうえお"].alignRight
+    doAssert aligned[0] == "     abcde"
+    doAssert aligned[1] == "あいうえお"
+
   let lineMaxWidth = lines.mapIt(it.stringWidth).max
   for line in lines:
     let
