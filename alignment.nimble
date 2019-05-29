@@ -2,7 +2,7 @@
 
 version       = "1.0.0"
 author        = "jiro4989"
-description   = "align is a library"
+description   = "alignment is a library"
 license       = "MIT"
 srcDir        = "src"
 
@@ -13,7 +13,7 @@ requires "nim >= 0.19.4"
 requires "eastasianwidth >= 1.1.0"
 
 task docs, "Generate documents":
-  exec "nimble doc src/align.nim -o:docs/align.html"
+  exec "nimble doc src/alignment.nim -o:docs/alignment.html"
 
 task ci, "Run CI":
   exec "nim -v"

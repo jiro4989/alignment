@@ -1,5 +1,5 @@
 import unittest
-import align, strutils
+import alignment, strutils
 
 doAssert "abcd".alignLeft(6) == "abcd  "
 doAssert "abcd".align(6) == "  abcd"

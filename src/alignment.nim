@@ -6,7 +6,7 @@
 ##
 
 runnableExamples:
-  import align
+  import alignment
 
   let s = @["abcde", "あいうえお"]
   for line in s.alignCenter:

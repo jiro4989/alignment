@@ -8,7 +8,6 @@ os:
 
 env:
   - PATH=$HOME/.nimble/bin:$PATH
-    APP_NAME=rect
 
 addons:
   apt:
@@ -32,17 +31,3 @@ script:
   - set -e
   - nimble ci
   - set +e
-
-before_deploy:
-  - mkdir -p dist/${APP_NAME}_${TRAVIS_OS_NAME}
-  - cp -rf LICENSE README* bin dist/${APP_NAME}_${TRAVIS_OS_NAME}/
-  - tar -C dist -czf ${APP_NAME}_${TRAVIS_OS_NAME}{.tar.gz,}
-
-deploy:
-  provider: releases
-  api_key: "$GITHUB_OAUTH_TOKEN"
-  keep-history: false
-  skip_cleanup: true
-  file: ${APP_NAME}_${TRAVIS_OS_NAME}.tar.gz
-  on:
-    tags: true
