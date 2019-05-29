@@ -1,3 +1,21 @@
+## This module provides functions to align texts.
+## The procedures consider multibyte strings.
+##
+## Usage example
+## =============
+##
+
+runnableExamples:
+  import align
+
+  let s = @["abcde", "あいうえお"]
+  for line in s.alignCenter:
+    echo "<", line, ">"
+
+  ## Output:
+  ## <  abcde   >
+  ## <あいうえお>
+
 import eastasianwidth
 import strutils
 from sequtils import mapIt
