@@ -3,10 +3,19 @@ import strutils
 from sequtils import mapIt
 
 proc alignLeft*(lines: openArray[string], pad = " "): seq[string] =
-  discard
+  let lineMaxWidth = lines.mapIt(it.stringWidth).max
+  for line in lines:
+    let diff = lineMaxWidth - line.stringWidth
+    var s = line
+    if 0 < diff:
+      let repeatCount = int(diff / pad.stringWidth)
+      if 0 < repeatCount:
+        let pads = pad.repeat(repeatCount).join
+        s.add " ".repeat(lineMaxWidth - line.stringWidth - pads.stringWidth).join
+        s.add pads
+    result.add s
 
 proc alignCenter*(lines: openArray[string], pad = " ", marginLeft = 0, marginRight = 0): seq[string] =
-  ## "Hello" -> "|  Hello  |"
   let lineMaxWidth = lines.mapIt(it.stringWidth).max
   for line in lines:
     let diff = lineMaxWidth - line.stringWidth
@@ -23,4 +32,15 @@ proc alignCenter*(lines: openArray[string], pad = " ", marginLeft = 0, marginRig
     result.add s
 
 proc alignRight*(lines: openArray[string], pad = " "): seq[string] =
-  discard
+  let lineMaxWidth = lines.mapIt(it.stringWidth).max
+  for line in lines:
+    let
+      diff = lineMaxWidth - line.stringWidth
+      repeatCount = int(diff / pad.stringWidth)
+    var s: string
+    if 0 < repeatCount:
+      let pads = pad.repeat(repeatCount).join
+      s.add pads
+      s.add " ".repeat(lineMaxWidth - line.stringWidth - pads.stringWidth).join
+    s.add line
+    result.add s
