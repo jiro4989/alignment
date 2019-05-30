@@ -6,30 +6,14 @@
 alignment is a library to align strings.
 The procedures consider multibyte strings (ex: あいうえお, 漢字).
 
-== ライブラリ説明
+== Overview
 
-テキストを単純に `strutils.align` などでパディングした場合、
-ターミナルで確認した際に、揃い位置がずれることがある。
-これは半角アルファベットとひらがななどを含むマルチバイト文字で、
-文字のバイトサイズが異なることに起因する。
+The goal of this library is resolving texts out of alignment.
 
-以下の例を確認しよう。
+A text will be out of alignment in terminal if you are padding with `strutils.align`.
+This problem is occured by containing multibyte string.
 
-この例では、"a"の長さが1、"あ"の長さが3であることがわかる。
-`len` プロシージャは文字の数ではなく、文字のバイト長であるを返す。
-
-同様に、 `strutils.alignLeft` も文字列のパディングをバイト長を基準に行う。
-よって、シングルバイト文字のみのテキストとマルチバイト文字を含む文字列に対して
-alignを行った場合、以下のような結果になる。
-
-見ての通り、バイト長に関しては両者とも一致するものの、文字列の見た目上のパディン
-グについては不揃いになってします。これらはWebブラウザのレンダリングの関係で
-不揃いであることがわかりにくくなっているものの、これの検証を
-ターミナル上で実施し、ターミナル上で等幅フォントを使用して確認したとき、
-それは顕著にわかるだろう。
-
-本ライブラリでは、このTUI上で確認したときの位置揃えの不一致の問題を解消すること
-を目的とする。
+See below a example that a text is out of alignment.
 
 [source,nim]
 ----
@@ -37,11 +21,26 @@ import strutils
 
 doAssert "a".len == 1
 doAssert "あ".len == 3
+----
+
+This example shows that length of "a" is 1 and length of "あ" is 3.
+`len` procedure returns a byte length, not count of characters.
+Similarly, `strutils.alignLeft` is padding by byte length.
+
+See below.
+
+[source,nim]
+----
+import strutils
+
 doAssert "a".alignLeft(5) == "a    "
 doAssert "あ".alignLeft(5) == "あ  "
 doAssert "a".alignLeft(5).len == 5
 doAssert "あ".alignLeft(5).len == 5
 ----
+
+A byte length equals, but texts look width doesn't equal.
+This will be a problem when draw ruled lines on the terminal.
 
 == Development
 
