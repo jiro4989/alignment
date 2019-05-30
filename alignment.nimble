@@ -9,7 +9,7 @@ srcDir        = "src"
 
 # Dependencies
 
-requires "nim >= 0.19.4"
+requires "nim >= 0.19.6"
 requires "eastasianwidth >= 1.1.0"
 
 task docs, "Generate documents":
