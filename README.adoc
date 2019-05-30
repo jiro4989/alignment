@@ -39,6 +39,14 @@ doAssert "a".alignLeft(5).len == 5
 doAssert "あ".alignLeft(5).len == 5
 ----
 
+[source,nim]
+----
+import unicode
+
+doAssert align("A", 4) == "   A"
+doAssert align("あ", 4) == "   あ"
+----
+
 A byte length equals, but texts look width doesn't equal.
 This will be a problem when draw ruled lines on the terminal.
 
