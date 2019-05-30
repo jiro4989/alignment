@@ -1,5 +1,6 @@
 import unittest
-import alignment, strutils
+import strutils
+import alignment
 
 doAssert "a".len == 1
 doAssert "あ".len == 3
@@ -41,6 +42,16 @@ suite "alignLeft":
       ]
     check @["Hello", "こんにちは"].alignLeft(pad = "あ") == @[
       "Hello ああ",
+      "こんにちは",
+      ]
+  test "Count of data is 1":
+    check @["Hello"].alignLeft == @["Hello"]
+  test "Count of data is empty":
+    var empty: seq[string]
+    check empty.alignLeft == empty
+  test "Pad is empty":
+    check @["Hello1", "こんにちは"].alignLeft(pad = "") == @[
+      "Hello1",
       "こんにちは",
       ]
 
@@ -86,6 +97,16 @@ suite "alignCenter":
       "　Hello 　",
       "こんにちは",
       ]
+  test "Count of data is 1":
+    check @["Hello"].alignCenter == @["Hello"]
+  test "Count of data is empty":
+    var empty: seq[string]
+    check empty.alignCenter == empty
+  test "Pad is empty":
+    check @["Hello1", "こんにちは"].alignCenter(pad = "") == @[
+      "Hello1",
+      "こんにちは",
+      ]
 
 suite "alignRight":
   test "Half width and full width":
@@ -114,5 +135,15 @@ suite "alignRight":
       ]
     check @["Hello", "こんにちは"].alignRight(pad = "あ") == @[
       "ああ Hello",
+      "こんにちは",
+      ]
+  test "Count of data is 1":
+    check @["Hello"].alignRight == @["Hello"]
+  test "Count of data is empty":
+    var empty: seq[string]
+    check empty.alignRight == empty
+  test "Pad is empty":
+    check @["Hello1", "こんにちは"].alignRight(pad = "") == @[
+      "Hello1",
       "こんにちは",
       ]

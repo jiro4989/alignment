@@ -40,6 +40,10 @@ proc alignLeft*(lines: openArray[string], pad = " "): seq[string] =
     doAssert aligned[0] == "abcde     "
     doAssert aligned[1] == "あいうえお"
 
+  if lines.len < 1: return
+  if pad == "":
+    result.add lines
+    return
   let lineMaxWidth = lines.mapIt(it.stringWidth).max
   for line in lines:
     let
@@ -60,6 +64,10 @@ proc alignCenter*(lines: openArray[string], pad = " "): seq[string] =
     doAssert aligned[0] == "  abcde   "
     doAssert aligned[1] == "あいうえお"
 
+  if lines.len < 1: return
+  if pad == "":
+    result.add lines
+    return
   let lineMaxWidth = lines.mapIt(it.stringWidth).max
   for line in lines:
     let diff = lineMaxWidth - line.stringWidth
@@ -83,6 +91,10 @@ proc alignRight*(lines: openArray[string], pad = " "): seq[string] =
     doAssert aligned[0] == "     abcde"
     doAssert aligned[1] == "あいうえお"
 
+  if lines.len < 1: return
+  if pad == "":
+    result.add lines
+    return
   let lineMaxWidth = lines.mapIt(it.stringWidth).max
   for line in lines:
     let
