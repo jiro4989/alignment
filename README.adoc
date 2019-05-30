@@ -27,9 +27,6 @@ Similarly, `strutils.alignLeft` is padding by byte length.
 
 See below a example that a text is out of alignment.
 
-This library is resolving one.
-About usage of library, see usage section.
-
 [source,nim]
 ----
 import strutils
@@ -42,6 +39,9 @@ doAssert "あ".alignLeft(5).len == 5
 
 A byte length equals, but texts look width doesn't equal.
 This will be a problem when draw ruled lines on the terminal.
+
+This library is resolving one.
+About usage of library, see usage section.
 
 == Development
 
