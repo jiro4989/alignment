@@ -13,12 +13,10 @@ The goal of this library is resolving texts out of alignment.
 A text will be out of alignment in terminal if you are padding with `strutils.align`.
 This problem is occured by containing multibyte string.
 
-See below a example that a text is out of alignment.
+See below.
 
 [source,nim]
 ----
-import strutils
-
 doAssert "a".len == 1
 doAssert "あ".len == 3
 ----
@@ -27,7 +25,7 @@ This example shows that length of "a" is 1 and length of "あ" is 3.
 `len` procedure returns a byte length, not count of characters.
 Similarly, `strutils.alignLeft` is padding by byte length.
 
-See below.
+See below a example that a text is out of alignment.
 
 [source,nim]
 ----
