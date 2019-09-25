@@ -32,7 +32,7 @@ import eastasianwidth
 import strutils
 from sequtils import mapIt
 
-proc alignLeft*(lines: openArray[string], pad = " "): seq[string] =
+proc alignLeft*(lines: openArray[string], pad = " ", halfPad = " "): seq[string] =
   ## Aligns strings with padding, so that it is of max look length of strings.
   ## Padding string are added before resulting in left alignment. 
   runnableExamples:
@@ -51,10 +51,10 @@ proc alignLeft*(lines: openArray[string], pad = " "): seq[string] =
     var s = line
     if 0 < repeatCount:
       let pads = pad.repeat(repeatCount).join
-      s.add " ".repeat(lineMaxWidth - line.stringWidth - pads.stringWidth).join
+      s.add halfPad.repeat(lineMaxWidth - line.stringWidth - pads.stringWidth).join
       s.add pads
     elif 0 < diff:
-      s.add " ".repeat(diff)
+      s.add halfPad.repeat(diff)
     result.add s
 
 proc alignCenter*(lines: openArray[string], pad = " "): seq[string] =
