@@ -98,13 +98,14 @@ proc alignRight*(lines: openArray[string], pad = " "): seq[string] =
     return
   let lineMaxWidth = lines.mapIt(it.stringWidth).max
   for line in lines:
-    let
-      diff = lineMaxWidth - line.stringWidth
-      repeatCount = int(diff / pad.stringWidth)
+    let diff = lineMaxWidth - line.stringWidth
+    let repeatCount = int(diff / pad.stringWidth)
     var s: string
     if 0 < repeatCount:
       let pads = pad.repeat(repeatCount).join
       s.add pads
       s.add " ".repeat(lineMaxWidth - line.stringWidth - pads.stringWidth).join
+    elif 0 < diff:
+      s.add " ".repeat(diff)
     s.add line
     result.add s
