@@ -72,6 +72,14 @@ suite "alignLeft":
       "bbbb ",
       "bbbbb",
       ]
+  test "Set half pad":
+    check @["a", "aa", "aaa", "aaaa", "aaaaa"].alignLeft(pad = "　", halfPad = "x") == @[
+      "a　　",
+      "aax　",
+      "aaa　",
+      "aaaax",
+      "aaaaa",
+      ]
   test "Count of data is 1":
     check @["Hello"].alignLeft == @["Hello"]
   test "Count of data is empty":
