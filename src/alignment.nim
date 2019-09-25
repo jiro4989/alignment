@@ -75,11 +75,17 @@ proc alignCenter*(lines: openArray[string], pad = " "): seq[string] =
     var s: string
     if 0 < diff:
       let repeatCount = int(diff / pad.stringWidth / 2)
-      s.add pad.repeat(repeatCount).join
+      let p = pad.repeat(repeatCount).join
+      s.add p
+
+      let lc2 = int((lineMaxWidth - line.stringWidth - int(p.stringWidth * 2)) / 2)
+      let p2 = " ".repeat(lc2).join
+      s.add p2
       s.add line
-      if diff mod 2 != 0:
-        s.add " "
-      s.add pad.repeat(repeatCount).join
+      s.add " ".repeat(lineMaxWidth - line.stringWidth - p.stringWidth * 2 - p2.stringWidth * 2).join
+      s.add p2
+
+      s.add p
     else:
       s.add line
     result.add s
