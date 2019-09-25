@@ -84,7 +84,7 @@ proc alignCenter*(lines: openArray[string], pad = " "): seq[string] =
       s.add line
     result.add s
 
-proc alignRight*(lines: openArray[string], pad = " "): seq[string] =
+proc alignRight*(lines: openArray[string], pad = " ", halfPad = " "): seq[string] =
   ## Aligns strings with padding, so that it is of max look length of strings.
   ## Padding string are added after resulting in right alignment. 
   runnableExamples:
@@ -104,8 +104,8 @@ proc alignRight*(lines: openArray[string], pad = " "): seq[string] =
     if 0 < repeatCount:
       let pads = pad.repeat(repeatCount).join
       s.add pads
-      s.add " ".repeat(lineMaxWidth - line.stringWidth - pads.stringWidth).join
+      s.add halfPad.repeat(lineMaxWidth - line.stringWidth - pads.stringWidth).join
     elif 0 < diff:
-      s.add " ".repeat(diff)
+      s.add halfPad.repeat(diff)
     s.add line
     result.add s
