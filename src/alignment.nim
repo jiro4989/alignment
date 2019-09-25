@@ -46,14 +46,15 @@ proc alignLeft*(lines: openArray[string], pad = " "): seq[string] =
     return
   let lineMaxWidth = lines.mapIt(it.stringWidth).max
   for line in lines:
-    let
-      diff = lineMaxWidth - line.stringWidth
-      repeatCount = int(diff / pad.stringWidth)
+    let diff = lineMaxWidth - line.stringWidth
+    let repeatCount = int(diff / pad.stringWidth)
     var s = line
     if 0 < repeatCount:
       let pads = pad.repeat(repeatCount).join
       s.add " ".repeat(lineMaxWidth - line.stringWidth - pads.stringWidth).join
       s.add pads
+    elif 0 < diff:
+      s.add " ".repeat(diff)
     result.add s
 
 proc alignCenter*(lines: openArray[string], pad = " "): seq[string] =
