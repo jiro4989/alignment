@@ -40,6 +40,10 @@ proc alignLeft*(lines: openArray[string], pad = " ", halfPad = " "): seq[string]
     doAssert aligned[0] == "abcde     "
     doAssert aligned[1] == "あいうえお"
 
+    let aligned2 = @["abcde", "あいうえお"].alignLeft(pad = "ん", halfPad = "X")
+    doAssert aligned2[0] == "abcdeXんん"
+    doAssert aligned2[1] == "あいうえお"
+
   if lines.len < 1: return
   if pad == "":
     result.add lines
@@ -57,13 +61,17 @@ proc alignLeft*(lines: openArray[string], pad = " ", halfPad = " "): seq[string]
       s.add halfPad.repeat(diff)
     result.add s
 
-proc alignCenter*(lines: openArray[string], pad = " "): seq[string] =
+proc alignCenter*(lines: openArray[string], pad = " ", halfPad = " "): seq[string] =
   ## Aligns strings with padding, so that it is of max look length of strings.
   ## Padding string are added before and after resulting in center alignment. 
   runnableExamples:
     let aligned = @["abcde", "あいうえお"].alignCenter
     doAssert aligned[0] == "  abcde   "
     doAssert aligned[1] == "あいうえお"
+
+    let aligned2 = @["abcde", "あいうえお"].alignCenter(pad = "ん", halfPad = "X")
+    doAssert aligned2[0] == "んabcdeXん"
+    doAssert aligned2[1] == "あいうえお"
 
   if lines.len < 1: return
   if pad == "":
@@ -79,10 +87,10 @@ proc alignCenter*(lines: openArray[string], pad = " "): seq[string] =
       s.add p
 
       let lc2 = int((lineMaxWidth - line.stringWidth - int(p.stringWidth * 2)) / 2)
-      let p2 = " ".repeat(lc2).join
+      let p2 = halfPad.repeat(lc2).join
       s.add p2
       s.add line
-      s.add " ".repeat(lineMaxWidth - line.stringWidth - p.stringWidth * 2 - p2.stringWidth * 2).join
+      s.add halfPad.repeat(lineMaxWidth - line.stringWidth - p.stringWidth * 2 - p2.stringWidth * 2).join
       s.add p2
 
       s.add p
@@ -97,6 +105,10 @@ proc alignRight*(lines: openArray[string], pad = " ", halfPad = " "): seq[string
     let aligned = @["abcde", "あいうえお"].alignRight
     doAssert aligned[0] == "     abcde"
     doAssert aligned[1] == "あいうえお"
+
+    let aligned2 = @["abcde", "あいうえお"].alignRight(pad = "ん", halfPad = "X")
+    doAssert aligned2[0] == "んんXabcde"
+    doAssert aligned2[1] == "あいうえお"
 
   if lines.len < 1: return
   if pad == "":
