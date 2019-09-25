@@ -140,6 +140,14 @@ suite "alignCenter":
       "aaaa ",
       "aaaaa",
       ]
+  test "Set half pad":
+    check @["a", "aa", "aaa", "aaaa", "aaaaa"].alignCenter(pad = "　", halfPad = "x") == @[
+      "　a　",
+      "xaaxx",
+      "xaaax",
+      "aaaax",
+      "aaaaa",
+      ]
   test "Count of data is 1":
     check @["Hello"].alignCenter == @["Hello"]
   test "Count of data is empty":
