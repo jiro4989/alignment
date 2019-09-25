@@ -44,6 +44,34 @@ suite "alignLeft":
       "Hello ああ",
       "こんにちは",
       ]
+    check @["a", "aa", "aaa", "aaaa", "aaaaa"].alignLeft(pad = "　") == @[
+      "a　　",
+      "aa 　",
+      "aaa　",
+      "aaaa ",
+      "aaaaa",
+      ]
+    check @["あ", "ああ", "あああ", "ああああ", "あああああ"].alignLeft(pad = "　") == @[
+      "あ　　　　",
+      "ああ　　　",
+      "あああ　　",
+      "ああああ　",
+      "あああああ",
+      ]
+    check @["あ", "bcd", "あああ", "ああああ", "あああああ"].alignLeft(pad = "　") == @[
+      "あ　　　　",
+      "bcd 　　　",
+      "あああ　　",
+      "ああああ　",
+      "あああああ",
+      ]
+    check @["b", "bb", "bbb", "bbbb", "bbbbb"].alignLeft(pad = "あa") == @[
+      "b あa",
+      "bbあa",
+      "bbb  ",
+      "bbbb ",
+      "bbbbb",
+      ]
   test "Count of data is 1":
     check @["Hello"].alignLeft == @["Hello"]
   test "Count of data is empty":
