@@ -173,6 +173,27 @@ suite "alignRight":
       "ああ Hello",
       "こんにちは",
       ]
+    check @["a", "aa", "aaa", "aaaa", "aaaaa"].alignRight(pad = "　") == @[
+      "　　a",
+      "　 aa",
+      "　aaa",
+      " aaaa",
+      "aaaaa",
+      ]
+    check @["あ", "bcd", "あああ", "ああああ", "あああああ"].alignRight(pad = "　") == @[
+      "　　　　あ",
+      "　　　 bcd",
+      "　　あああ",
+      "　ああああ",
+      "あああああ",
+      ]
+    check @["b", "bb", "bbb", "bbbb", "bbbbb"].alignRight(pad = "あa") == @[
+      "あa b",
+      "あabb",
+      "  bbb",
+      " bbbb",
+      "bbbbb",
+      ]
   test "Count of data is 1":
     check @["Hello"].alignRight == @["Hello"]
   test "Count of data is empty":
