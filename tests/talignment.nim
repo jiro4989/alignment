@@ -217,6 +217,31 @@ suite "alignRight":
       "     Hello",
       "         1",
       ]
+  test "Half width and full width and set width = 14":
+    let width = 14
+    check @["Hello", "こんにちは"].alignRight(width = width) == @[
+      "         Hello",
+      "    こんにちは",
+      ]
+    check @["こんにちは", "Hello"].alignRight(width = width) == @[
+      "    こんにちは",
+      "         Hello",
+      ]
+    check @["こんにちは", "Hello", "1"].alignRight(width = width) == @[
+      "    こんにちは",
+      "         Hello",
+      "             1",
+      ]
+    check @["こんにちは", "Hello", "1"].alignRight(width = 0) == @[
+      "こんにちは",
+      "     Hello",
+      "         1",
+      ]
+    check @["こんにちは", "Hello", "1"].alignRight(width = 1) == @[
+      "こんにちは",
+      "     Hello",
+      "         1",
+      ]
   test "Pad = x":
     check @["Hello1", "こんにちは"].alignRight(pad = "x") == @[
       "xxxxHello1",
