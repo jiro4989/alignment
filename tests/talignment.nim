@@ -139,6 +139,20 @@ suite "alignCenter":
       "  Hello1  ",
       "こんにちは",
       ]
+  test "Half width and full width and set width = 14":
+    let width = 14
+    check @["Hello", "こんにちは"].alignCenter(width = width) == @[
+      "    Hello     ",
+      "  こんにちは  ",
+      ]
+    check @["Hello", "こんにちは"].alignCenter(width = 0) == @[
+      "  Hello   ",
+      "こんにちは",
+      ]
+    check @["Hello", "こんにちは"].alignCenter(width = 1) == @[
+      "  Hello   ",
+      "こんにちは",
+      ]
   test "Pad = x":
     check @["Hello1", "こんにちは"].alignCenter(pad = "x") == @[
       "xxHello1xx",
