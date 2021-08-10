@@ -1,0 +1,30 @@
+name: test
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - '**.nim'
+      - '.github/**'
+  pull_request:
+    paths:
+      - '**.nim'
+      - '.github/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version:
+          - 1.0.0
+          - stable
+    steps:
+      - uses: actions/checkout@v2
+      - uses: jiro4989/setup-nim-action@v1
+        with:
+          nim-version: ${{ matrix.version }}
+
+      - run: nimble install -Y
+      - run: nimble test -Y
