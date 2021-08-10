@@ -30,6 +30,21 @@ suite "alignLeft":
       "Hello     ",
       "1         ",
       ]
+  test "Half width and full width and set width = 14":
+    let width = 14
+    check @["Hello", "こんにちは"].alignLeft(width = width) == @[
+      "Hello         ",
+      "こんにちは    ",
+      ]
+    check @["こんにちは", "Hello"].alignLeft(width = width) == @[
+      "こんにちは    ",
+      "Hello         ",
+      ]
+    check @["こんにちは", "Hello", "1"].alignLeft(width = width) == @[
+      "こんにちは    ",
+      "Hello         ",
+      "1             ",
+      ]
   test "Pad = x":
     check @["Hello1", "こんにちは"].alignLeft(pad = "x") == @[
       "Hello1xxxx",
