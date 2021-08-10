@@ -45,6 +45,16 @@ suite "alignLeft":
       "Hello         ",
       "1             ",
       ]
+    check @["こんにちは", "Hello", "1"].alignLeft(width = 0) == @[
+      "こんにちは",
+      "Hello     ",
+      "1         ",
+      ]
+    check @["こんにちは", "Hello", "1"].alignLeft(width = 1) == @[
+      "こんにちは",
+      "Hello     ",
+      "1         ",
+      ]
   test "Pad = x":
     check @["Hello1", "こんにちは"].alignLeft(pad = "x") == @[
       "Hello1xxxx",
