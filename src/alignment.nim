@@ -69,7 +69,8 @@ proc alignLeft*(lines: openArray[string], pad = " ", halfPad = " ",
       s.add halfPad.repeat(diff)
     result.add s
 
-proc alignCenter*(lines: openArray[string], pad = " ", halfPad = " ", width = -1): seq[string] =
+proc alignCenter*(lines: openArray[string], pad = " ", halfPad = " ",
+    width = -1): seq[string] =
   ## Aligns strings with padding, so that it is of max look length of strings.
   ## Padding string are added before and after resulting in center alignment.
   runnableExamples:
