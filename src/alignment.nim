@@ -113,7 +113,8 @@ proc alignCenter*(lines: openArray[string], pad = " ", halfPad = " ",
       s.add line
     result.add s
 
-proc alignRight*(lines: openArray[string], pad = " ", halfPad = " ", width = -1): seq[string] =
+proc alignRight*(lines: openArray[string], pad = " ", halfPad = " ",
+    width = -1): seq[string] =
   ## Aligns strings with padding, so that it is of max look length of strings.
   ## Padding string are added after resulting in right alignment.
   runnableExamples:
