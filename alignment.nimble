@@ -1,6 +1,6 @@
 # Package
 
-version       = "1.1.1"
+version       = "1.2.0"
 author        = "jiro4989"
 description   = "alignment is a library to align strings."
 license       = "MIT"
