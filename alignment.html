@@ -97,17 +97,20 @@ function main() {
   <ul class="simple simple-toc-section">
       <ul class="simple nested-toc-section">alignRight
       <li><a class="reference" href="#alignRight%2CopenArray%5Bstring%5D%2Cstring%2Cstring"
-    title="alignRight(lines: openArray[string]; pad = &quot; &quot;; halfPad = &quot; &quot;): seq[string]">alignRight,<wbr>openArray[string],<wbr>string,<wbr>string</a></li>
+    title="alignRight(lines: openArray[string]; pad = &quot; &quot;; halfPad = &quot; &quot;; width = -1): seq[
+    string]">alignRight,<wbr>openArray[string],<wbr>string,<wbr>string</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">alignLeft
       <li><a class="reference" href="#alignLeft%2CopenArray%5Bstring%5D%2Cstring%2Cstring"
-    title="alignLeft(lines: openArray[string]; pad = &quot; &quot;; halfPad = &quot; &quot;): seq[string]">alignLeft,<wbr>openArray[string],<wbr>string,<wbr>string</a></li>
+    title="alignLeft(lines: openArray[string]; pad = &quot; &quot;; halfPad = &quot; &quot;; width = -1): seq[
+    string]">alignLeft,<wbr>openArray[string],<wbr>string,<wbr>string</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">alignCenter
       <li><a class="reference" href="#alignCenter%2CopenArray%5Bstring%5D%2Cstring%2Cstring"
-    title="alignCenter(lines: openArray[string]; pad = &quot; &quot;; halfPad = &quot; &quot;): seq[string]">alignCenter,<wbr>openArray[string],<wbr>string,<wbr>string</a></li>
+    title="alignCenter(lines: openArray[string]; pad = &quot; &quot;; halfPad = &quot; &quot;; width = -1): seq[
+    string]">alignCenter,<wbr>openArray[string],<wbr>string,<wbr>string</a></li>
 
   </ul>
 
@@ -147,11 +150,11 @@ function main() {
 <h1><a class="toc-backref" href="#12">Procs</a></h1>
 <dl class="item">
 <a id="alignLeft,openArray[string],string,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#alignLeft%2CopenArray%5Bstring%5D%2Cstring%2Cstring"><span class="Identifier">alignLeft</span></a><span class="Other">(</span><span class="Identifier">lines</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">pad</span> <span class="Other">=</span> <span class="StringLit">&quot; &quot;</span><span class="Other">;</span> <span class="Identifier">halfPad</span> <span class="Other">=</span> <span class="StringLit">&quot; &quot;</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#alignLeft%2CopenArray%5Bstring%5D%2Cstring%2Cstring"><span class="Identifier">alignLeft</span></a><span class="Other">(</span><span class="Identifier">lines</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">pad</span> <span class="Other">=</span> <span class="StringLit">&quot; &quot;</span><span class="Other">;</span> <span class="Identifier">halfPad</span> <span class="Other">=</span> <span class="StringLit">&quot; &quot;</span><span class="Other">;</span> <span class="Identifier">width</span> <span class="Other">=</span> <span class="Operator">-</span><span class="DecNumber">1</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span>
+    <span class="Identifier">string</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-Aligns strings with padding, so that it is of max look length of strings. Padding string are added before resulting in left alignment. 
+Aligns strings with padding, so that it is of max look length of strings. Padding string are added before resulting in left alignment.
 <p><strong class="examples_text">Example:</strong></p>
 <pre class="listing"><span class="Keyword">let</span><span class="Whitespace"> </span><span class="Identifier">aligned</span><span class="Whitespace"> </span><span class="Operator">=</span><span class="Whitespace"> </span><span class="Operator">@</span><span class="Punctuation">[</span><span class="StringLit">&quot;abcde&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;あいうえお&quot;</span><span class="Punctuation">]</span><span class="Operator">.</span><span class="Identifier">alignLeft</span><span class="Whitespace">
 </span><span class="Identifier">doAssert</span><span class="Whitespace"> </span><span class="Identifier">aligned</span><span class="Punctuation">[</span><span class="DecNumber">0</span><span class="Punctuation">]</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;abcde     &quot;</span><span class="Whitespace">
@@ -163,11 +166,11 @@ Aligns strings with padding, so that it is of max look length of strings. Paddin
 
 </dd>
 <a id="alignCenter,openArray[string],string,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#alignCenter%2CopenArray%5Bstring%5D%2Cstring%2Cstring"><span class="Identifier">alignCenter</span></a><span class="Other">(</span><span class="Identifier">lines</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">pad</span> <span class="Other">=</span> <span class="StringLit">&quot; &quot;</span><span class="Other">;</span> <span class="Identifier">halfPad</span> <span class="Other">=</span> <span class="StringLit">&quot; &quot;</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#alignCenter%2CopenArray%5Bstring%5D%2Cstring%2Cstring"><span class="Identifier">alignCenter</span></a><span class="Other">(</span><span class="Identifier">lines</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">pad</span> <span class="Other">=</span> <span class="StringLit">&quot; &quot;</span><span class="Other">;</span> <span class="Identifier">halfPad</span> <span class="Other">=</span> <span class="StringLit">&quot; &quot;</span><span class="Other">;</span> <span class="Identifier">width</span> <span class="Other">=</span> <span class="Operator">-</span><span class="DecNumber">1</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span>
+    <span class="Identifier">string</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-Aligns strings with padding, so that it is of max look length of strings. Padding string are added before and after resulting in center alignment. 
+Aligns strings with padding, so that it is of max look length of strings. Padding string are added before and after resulting in center alignment.
 <p><strong class="examples_text">Example:</strong></p>
 <pre class="listing"><span class="Keyword">let</span><span class="Whitespace"> </span><span class="Identifier">aligned</span><span class="Whitespace"> </span><span class="Operator">=</span><span class="Whitespace"> </span><span class="Operator">@</span><span class="Punctuation">[</span><span class="StringLit">&quot;abcde&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;あいうえお&quot;</span><span class="Punctuation">]</span><span class="Operator">.</span><span class="Identifier">alignCenter</span><span class="Whitespace">
 </span><span class="Identifier">doAssert</span><span class="Whitespace"> </span><span class="Identifier">aligned</span><span class="Punctuation">[</span><span class="DecNumber">0</span><span class="Punctuation">]</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;  abcde   &quot;</span><span class="Whitespace">
@@ -179,11 +182,11 @@ Aligns strings with padding, so that it is of max look length of strings. Paddin
 
 </dd>
 <a id="alignRight,openArray[string],string,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#alignRight%2CopenArray%5Bstring%5D%2Cstring%2Cstring"><span class="Identifier">alignRight</span></a><span class="Other">(</span><span class="Identifier">lines</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">pad</span> <span class="Other">=</span> <span class="StringLit">&quot; &quot;</span><span class="Other">;</span> <span class="Identifier">halfPad</span> <span class="Other">=</span> <span class="StringLit">&quot; &quot;</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#alignRight%2CopenArray%5Bstring%5D%2Cstring%2Cstring"><span class="Identifier">alignRight</span></a><span class="Other">(</span><span class="Identifier">lines</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">pad</span> <span class="Other">=</span> <span class="StringLit">&quot; &quot;</span><span class="Other">;</span> <span class="Identifier">halfPad</span> <span class="Other">=</span> <span class="StringLit">&quot; &quot;</span><span class="Other">;</span> <span class="Identifier">width</span> <span class="Other">=</span> <span class="Operator">-</span><span class="DecNumber">1</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span>
+    <span class="Identifier">string</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-Aligns strings with padding, so that it is of max look length of strings. Padding string are added after resulting in right alignment. 
+Aligns strings with padding, so that it is of max look length of strings. Padding string are added after resulting in right alignment.
 <p><strong class="examples_text">Example:</strong></p>
 <pre class="listing"><span class="Keyword">let</span><span class="Whitespace"> </span><span class="Identifier">aligned</span><span class="Whitespace"> </span><span class="Operator">=</span><span class="Whitespace"> </span><span class="Operator">@</span><span class="Punctuation">[</span><span class="StringLit">&quot;abcde&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;あいうえお&quot;</span><span class="Punctuation">]</span><span class="Operator">.</span><span class="Identifier">alignRight</span><span class="Whitespace">
 </span><span class="Identifier">doAssert</span><span class="Whitespace"> </span><span class="Identifier">aligned</span><span class="Punctuation">[</span><span class="DecNumber">0</span><span class="Punctuation">]</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="StringLit">&quot;     abcde&quot;</span><span class="Whitespace">
@@ -204,7 +207,7 @@ Aligns strings with padding, so that it is of max look length of strings. Paddin
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-10 15:10:35 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2021-08-11 00:51:26 UTC</small>
       </div>
     </div>
   </div>
