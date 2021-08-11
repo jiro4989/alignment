@@ -32,6 +32,12 @@ import eastasianwidth
 import strutils
 from sequtils import mapIt
 
+template linesMaxWidth(lines: openArray[string], width: int): int =
+  let m = lines.mapIt(it.stringWidth).max
+  if width < 0: m
+  elif width < m: m
+  else: width
+
 proc alignLeft*(lines: openArray[string], pad = " ", halfPad = " ",
     width = -1): seq[string] =
   ## Aligns strings with padding, so that it is of max look length of strings.
@@ -49,13 +55,7 @@ proc alignLeft*(lines: openArray[string], pad = " ", halfPad = " ",
   if pad == "":
     result.add lines
     return
-  let lineMaxWidth =
-    block:
-      let lineMax = lines.mapIt(it.stringWidth).max
-      if width < 0: lineMax
-      elif width < lineMax: lineMax
-      else: width
-
+  let lineMaxWidth = linesMaxWidth(lines, width)
   for line in lines:
     let diff = lineMaxWidth - line.stringWidth
     let repeatCount = int(diff / pad.stringWidth)
@@ -86,12 +86,7 @@ proc alignCenter*(lines: openArray[string], pad = " ", halfPad = " ",
   if pad == "":
     result.add lines
     return
-  let lineMaxWidth =
-    block:
-      let lineMax = lines.mapIt(it.stringWidth).max
-      if width < 0: lineMax
-      elif width < lineMax: lineMax
-      else: width
+  let lineMaxWidth = linesMaxWidth(lines, width)
   for line in lines:
     let diff = lineMaxWidth - line.stringWidth
     var s: string
@@ -130,12 +125,7 @@ proc alignRight*(lines: openArray[string], pad = " ", halfPad = " ",
   if pad == "":
     result.add lines
     return
-  let lineMaxWidth =
-    block:
-      let lineMax = lines.mapIt(it.stringWidth).max
-      if width < 0: lineMax
-      elif width < lineMax: lineMax
-      else: width
+  let lineMaxWidth = linesMaxWidth(lines, width)
   for line in lines:
     let diff = lineMaxWidth - line.stringWidth
     let repeatCount = int(diff / pad.stringWidth)
