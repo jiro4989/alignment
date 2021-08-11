@@ -56,15 +56,18 @@ suite "alignLeft":
       "1         ",
       ]
   test "Additional pad width":
-    check @["Hello", "こんにちは"].alignLeft(additionalPadWidth = 10, pad = " ") == @[
+    check @["Hello", "こんにちは"].alignLeft(additionalPadWidth = 10,
+        pad = " ") == @[
       "Hello               ",
       "こんにちは          ",
       ]
-    check @["Hello", "こんにちは"].alignLeft(additionalPadWidth = 10, pad = "　") == @[
+    check @["Hello", "こんにちは"].alignLeft(additionalPadWidth = 10,
+        pad = "　") == @[
       "Hello 　　　　　　　",
       "こんにちは　　　　　",
       ]
-    check @["Hello", "こんにちは"].alignLeft(additionalPadWidth = 10, pad = "あ") == @[
+    check @["Hello", "こんにちは"].alignLeft(additionalPadWidth = 10,
+        pad = "あ") == @[
       "Hello あああああああ",
       "こんにちはあああああ",
       ]
@@ -167,11 +170,13 @@ suite "alignCenter":
       "こんにちは",
       ]
   test "Additional pad width":
-    check @["Hello", "こんにちは"].alignCenter(additionalPadWidth = 10, pad = " ") == @[
+    check @["Hello", "こんにちは"].alignCenter(additionalPadWidth = 10,
+        pad = " ") == @[
       "       Hello        ",
       "     こんにちは     ",
       ]
-    check @["Hello", "こんにちは"].alignCenter(additionalPadWidth = 10, pad = "あ") == @[
+    check @["Hello", "こんにちは"].alignCenter(additionalPadWidth = 10,
+        pad = "あ") == @[
       "あああ Hello  あああ",
       "ああ こんにちは ああ",
       ]
@@ -265,15 +270,18 @@ suite "alignRight":
       "         1",
       ]
   test "Additional pad width":
-    check @["Hello", "こんにちは"].alignRight(additionalPadWidth = 10, pad = " ") == @[
+    check @["Hello", "こんにちは"].alignRight(additionalPadWidth = 10,
+        pad = " ") == @[
       "               Hello",
       "          こんにちは",
       ]
-    check @["Hello", "こんにちは"].alignRight(additionalPadWidth = 10, pad = "　") == @[
+    check @["Hello", "こんにちは"].alignRight(additionalPadWidth = 10,
+        pad = "　") == @[
       "　　　　　　　 Hello",
       "　　　　　こんにちは",
       ]
-    check @["Hello", "こんにちは"].alignRight(additionalPadWidth = 10, pad = "あ") == @[
+    check @["Hello", "こんにちは"].alignRight(additionalPadWidth = 10,
+        pad = "あ") == @[
       "あああああああ Hello",
       "あああああこんにちは",
       ]
