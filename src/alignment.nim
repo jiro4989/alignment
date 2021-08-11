@@ -55,7 +55,8 @@ proc alignLeft*(lines: openArray[string], pad = " ", halfPad = " ",
     doAssert aligned3[0] == "abcde         "
     doAssert aligned3[1] == "あいうえお    "
 
-    let aligned4 = @["abcde", "あいうえお"].alignLeft(additionalPadWidth = 10)
+    let aligned4 = @["abcde", "あいうえお"].alignLeft(
+        additionalPadWidth = 10)
     doAssert aligned4[0] == "abcde               "
     doAssert aligned4[1] == "あいうえお          "
 
@@ -94,7 +95,8 @@ proc alignCenter*(lines: openArray[string], pad = " ", halfPad = " ",
     doAssert aligned3[0] == "    abcde     "
     doAssert aligned3[1] == "  あいうえお  "
 
-    let aligned4 = @["abcde", "あいうえお"].alignCenter(additionalPadWidth = 10)
+    let aligned4 = @["abcde", "あいうえお"].alignCenter(
+        additionalPadWidth = 10)
     doAssert aligned4[0] == "       abcde        "
     doAssert aligned4[1] == "     あいうえお     "
 
@@ -141,7 +143,8 @@ proc alignRight*(lines: openArray[string], pad = " ", halfPad = " ",
     doAssert aligned3[0] == "         abcde"
     doAssert aligned3[1] == "    あいうえお"
 
-    let aligned4 = @["abcde", "あいうえお"].alignRight(additionalPadWidth = 10)
+    let aligned4 = @["abcde", "あいうえお"].alignRight(
+        additionalPadWidth = 10)
     doAssert aligned4[0] == "               abcde"
     doAssert aligned4[1] == "          あいうえお"
 
