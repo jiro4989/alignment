@@ -39,7 +39,7 @@ template linesMaxWidth(lines: openArray[string], width: int): int =
   else: width
 
 proc alignLeft*(lines: openArray[string], pad = " ", halfPad = " ",
-    width = -1): seq[string] =
+    width = -1, additionalPadWidth = 0): seq[string] =
   ## Aligns strings with padding, so that it is of max look length of strings.
   ## Padding string are added before resulting in left alignment.
   runnableExamples:
@@ -59,7 +59,7 @@ proc alignLeft*(lines: openArray[string], pad = " ", halfPad = " ",
   if pad == "":
     result.add lines
     return
-  let lineMaxWidth = linesMaxWidth(lines, width)
+  let lineMaxWidth = linesMaxWidth(lines, width) + additionalPadWidth
   for line in lines:
     let diff = lineMaxWidth - line.stringWidth
     let repeatCount = int(diff / pad.stringWidth)
@@ -74,7 +74,7 @@ proc alignLeft*(lines: openArray[string], pad = " ", halfPad = " ",
     result.add s
 
 proc alignCenter*(lines: openArray[string], pad = " ", halfPad = " ",
-    width = -1): seq[string] =
+    width = -1, additionalPadWidth = 0): seq[string] =
   ## Aligns strings with padding, so that it is of max look length of strings.
   ## Padding string are added before and after resulting in center alignment.
   runnableExamples:
@@ -94,7 +94,7 @@ proc alignCenter*(lines: openArray[string], pad = " ", halfPad = " ",
   if pad == "":
     result.add lines
     return
-  let lineMaxWidth = linesMaxWidth(lines, width)
+  let lineMaxWidth = linesMaxWidth(lines, width) + additionalPadWidth
   for line in lines:
     let diff = lineMaxWidth - line.stringWidth
     var s: string
@@ -117,7 +117,7 @@ proc alignCenter*(lines: openArray[string], pad = " ", halfPad = " ",
     result.add s
 
 proc alignRight*(lines: openArray[string], pad = " ", halfPad = " ",
-    width = -1): seq[string] =
+    width = -1, additionalPadWidth = 0): seq[string] =
   ## Aligns strings with padding, so that it is of max look length of strings.
   ## Padding string are added after resulting in right alignment.
   runnableExamples:
@@ -137,7 +137,7 @@ proc alignRight*(lines: openArray[string], pad = " ", halfPad = " ",
   if pad == "":
     result.add lines
     return
-  let lineMaxWidth = linesMaxWidth(lines, width)
+  let lineMaxWidth = linesMaxWidth(lines, width) + additionalPadWidth
   for line in lines:
     let diff = lineMaxWidth - line.stringWidth
     let repeatCount = int(diff / pad.stringWidth)
