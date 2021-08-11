@@ -20,7 +20,7 @@ runnableExamples:
 
   for line in aligned:
     echo "| ", line, " |"
-  
+
   ## Output:
   ## |   abcde    |
   ## | あいうえお |
@@ -32,9 +32,16 @@ import eastasianwidth
 import strutils
 from sequtils import mapIt
 
-proc alignLeft*(lines: openArray[string], pad = " ", halfPad = " "): seq[string] =
+template linesMaxWidth(lines: openArray[string], width: int): int =
+  let m = lines.mapIt(it.stringWidth).max
+  if width < 0: m
+  elif width < m: m
+  else: width
+
+proc alignLeft*(lines: openArray[string], pad = " ", halfPad = " ",
+    width = -1): seq[string] =
   ## Aligns strings with padding, so that it is of max look length of strings.
-  ## Padding string are added before resulting in left alignment. 
+  ## Padding string are added before resulting in left alignment.
   runnableExamples:
     let aligned = @["abcde", "あいうえお"].alignLeft
     doAssert aligned[0] == "abcde     "
@@ -48,22 +55,24 @@ proc alignLeft*(lines: openArray[string], pad = " ", halfPad = " "): seq[string]
   if pad == "":
     result.add lines
     return
-  let lineMaxWidth = lines.mapIt(it.stringWidth).max
+  let lineMaxWidth = linesMaxWidth(lines, width)
   for line in lines:
     let diff = lineMaxWidth - line.stringWidth
     let repeatCount = int(diff / pad.stringWidth)
     var s = line
     if 0 < repeatCount:
       let pads = pad.repeat(repeatCount).join
-      s.add halfPad.repeat(lineMaxWidth - line.stringWidth - pads.stringWidth).join
+      s.add halfPad.repeat(lineMaxWidth - line.stringWidth -
+          pads.stringWidth).join
       s.add pads
     elif 0 < diff:
       s.add halfPad.repeat(diff)
     result.add s
 
-proc alignCenter*(lines: openArray[string], pad = " ", halfPad = " "): seq[string] =
+proc alignCenter*(lines: openArray[string], pad = " ", halfPad = " ",
+    width = -1): seq[string] =
   ## Aligns strings with padding, so that it is of max look length of strings.
-  ## Padding string are added before and after resulting in center alignment. 
+  ## Padding string are added before and after resulting in center alignment.
   runnableExamples:
     let aligned = @["abcde", "あいうえお"].alignCenter
     doAssert aligned[0] == "  abcde   "
@@ -77,7 +86,7 @@ proc alignCenter*(lines: openArray[string], pad = " ", halfPad = " "): seq[strin
   if pad == "":
     result.add lines
     return
-  let lineMaxWidth = lines.mapIt(it.stringWidth).max
+  let lineMaxWidth = linesMaxWidth(lines, width)
   for line in lines:
     let diff = lineMaxWidth - line.stringWidth
     var s: string
@@ -90,7 +99,8 @@ proc alignCenter*(lines: openArray[string], pad = " ", halfPad = " "): seq[strin
       let p2 = halfPad.repeat(lc2).join
       s.add p2
       s.add line
-      s.add halfPad.repeat(lineMaxWidth - line.stringWidth - p.stringWidth * 2 - p2.stringWidth * 2).join
+      s.add halfPad.repeat(lineMaxWidth - line.stringWidth - p.stringWidth * 2 -
+          p2.stringWidth * 2).join
       s.add p2
 
       s.add p
@@ -98,9 +108,10 @@ proc alignCenter*(lines: openArray[string], pad = " ", halfPad = " "): seq[strin
       s.add line
     result.add s
 
-proc alignRight*(lines: openArray[string], pad = " ", halfPad = " "): seq[string] =
+proc alignRight*(lines: openArray[string], pad = " ", halfPad = " ",
+    width = -1): seq[string] =
   ## Aligns strings with padding, so that it is of max look length of strings.
-  ## Padding string are added after resulting in right alignment. 
+  ## Padding string are added after resulting in right alignment.
   runnableExamples:
     let aligned = @["abcde", "あいうえお"].alignRight
     doAssert aligned[0] == "     abcde"
@@ -114,7 +125,7 @@ proc alignRight*(lines: openArray[string], pad = " ", halfPad = " "): seq[string
   if pad == "":
     result.add lines
     return
-  let lineMaxWidth = lines.mapIt(it.stringWidth).max
+  let lineMaxWidth = linesMaxWidth(lines, width)
   for line in lines:
     let diff = lineMaxWidth - line.stringWidth
     let repeatCount = int(diff / pad.stringWidth)
@@ -122,7 +133,8 @@ proc alignRight*(lines: openArray[string], pad = " ", halfPad = " "): seq[string
     if 0 < repeatCount:
       let pads = pad.repeat(repeatCount).join
       s.add pads
-      s.add halfPad.repeat(lineMaxWidth - line.stringWidth - pads.stringWidth).join
+      s.add halfPad.repeat(lineMaxWidth - line.stringWidth -
+          pads.stringWidth).join
     elif 0 < diff:
       s.add halfPad.repeat(diff)
     s.add line

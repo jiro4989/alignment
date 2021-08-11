@@ -30,6 +30,31 @@ suite "alignLeft":
       "Hello     ",
       "1         ",
       ]
+  test "Half width and full width and set width = 14":
+    let width = 14
+    check @["Hello", "こんにちは"].alignLeft(width = width) == @[
+      "Hello         ",
+      "こんにちは    ",
+      ]
+    check @["こんにちは", "Hello"].alignLeft(width = width) == @[
+      "こんにちは    ",
+      "Hello         ",
+      ]
+    check @["こんにちは", "Hello", "1"].alignLeft(width = width) == @[
+      "こんにちは    ",
+      "Hello         ",
+      "1             ",
+      ]
+    check @["こんにちは", "Hello", "1"].alignLeft(width = 0) == @[
+      "こんにちは",
+      "Hello     ",
+      "1         ",
+      ]
+    check @["こんにちは", "Hello", "1"].alignLeft(width = 1) == @[
+      "こんにちは",
+      "Hello     ",
+      "1         ",
+      ]
   test "Pad = x":
     check @["Hello1", "こんにちは"].alignLeft(pad = "x") == @[
       "Hello1xxxx",
@@ -51,14 +76,16 @@ suite "alignLeft":
       "aaaa ",
       "aaaaa",
       ]
-    check @["あ", "ああ", "あああ", "ああああ", "あああああ"].alignLeft(pad = "　") == @[
+    check @["あ", "ああ", "あああ", "ああああ",
+        "あああああ"].alignLeft(pad = "　") == @[
       "あ　　　　",
       "ああ　　　",
       "あああ　　",
       "ああああ　",
       "あああああ",
       ]
-    check @["あ", "bcd", "あああ", "ああああ", "あああああ"].alignLeft(pad = "　") == @[
+    check @["あ", "bcd", "あああ", "ああああ",
+        "あああああ"].alignLeft(pad = "　") == @[
       "あ　　　　",
       "bcd 　　　",
       "あああ　　",
@@ -73,7 +100,8 @@ suite "alignLeft":
       "bbbbb",
       ]
   test "Set half pad":
-    check @["a", "aa", "aaa", "aaaa", "aaaaa"].alignLeft(pad = "　", halfPad = "x") == @[
+    check @["a", "aa", "aaa", "aaaa", "aaaaa"].alignLeft(pad = "　",
+        halfPad = "x") == @[
       "a　　",
       "aax　",
       "aaa　",
@@ -111,6 +139,20 @@ suite "alignCenter":
       "  Hello1  ",
       "こんにちは",
       ]
+  test "Half width and full width and set width = 14":
+    let width = 14
+    check @["Hello", "こんにちは"].alignCenter(width = width) == @[
+      "    Hello     ",
+      "  こんにちは  ",
+      ]
+    check @["Hello", "こんにちは"].alignCenter(width = 0) == @[
+      "  Hello   ",
+      "こんにちは",
+      ]
+    check @["Hello", "こんにちは"].alignCenter(width = 1) == @[
+      "  Hello   ",
+      "こんにちは",
+      ]
   test "Pad = x":
     check @["Hello1", "こんにちは"].alignCenter(pad = "x") == @[
       "xxHello1xx",
@@ -141,7 +183,8 @@ suite "alignCenter":
       "aaaaa",
       ]
   test "Set half pad":
-    check @["a", "aa", "aaa", "aaaa", "aaaaa"].alignCenter(pad = "　", halfPad = "x") == @[
+    check @["a", "aa", "aaa", "aaaa", "aaaaa"].alignCenter(pad = "　",
+        halfPad = "x") == @[
       "　a　",
       "xaaxx",
       "xaaax",
@@ -174,6 +217,31 @@ suite "alignRight":
       "     Hello",
       "         1",
       ]
+  test "Half width and full width and set width = 14":
+    let width = 14
+    check @["Hello", "こんにちは"].alignRight(width = width) == @[
+      "         Hello",
+      "    こんにちは",
+      ]
+    check @["こんにちは", "Hello"].alignRight(width = width) == @[
+      "    こんにちは",
+      "         Hello",
+      ]
+    check @["こんにちは", "Hello", "1"].alignRight(width = width) == @[
+      "    こんにちは",
+      "         Hello",
+      "             1",
+      ]
+    check @["こんにちは", "Hello", "1"].alignRight(width = 0) == @[
+      "こんにちは",
+      "     Hello",
+      "         1",
+      ]
+    check @["こんにちは", "Hello", "1"].alignRight(width = 1) == @[
+      "こんにちは",
+      "     Hello",
+      "         1",
+      ]
   test "Pad = x":
     check @["Hello1", "こんにちは"].alignRight(pad = "x") == @[
       "xxxxHello1",
@@ -195,7 +263,8 @@ suite "alignRight":
       " aaaa",
       "aaaaa",
       ]
-    check @["あ", "bcd", "あああ", "ああああ", "あああああ"].alignRight(pad = "　") == @[
+    check @["あ", "bcd", "あああ", "ああああ",
+        "あああああ"].alignRight(pad = "　") == @[
       "　　　　あ",
       "　　　 bcd",
       "　　あああ",
@@ -210,7 +279,8 @@ suite "alignRight":
       "bbbbb",
       ]
   test "Set half pad":
-    check @["a", "aa", "aaa", "aaaa", "aaaaa"].alignRight(pad = "　", halfPad = "x") == @[
+    check @["a", "aa", "aaa", "aaaa", "aaaaa"].alignRight(pad = "　",
+        halfPad = "x") == @[
       "　　a",
       "　xaa",
       "　aaa",
