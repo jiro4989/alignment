@@ -1,4 +1,4 @@
 Basic usage	alignment.html#basic-usage	 Basic usage	
-alignLeft	alignment.html#alignLeft,openArray[string],string,string	alignment: alignLeft(lines: openArray[string]; pad = &quot; &quot;; halfPad = &quot; &quot;; width = -1): seq[\n    string]	
-alignCenter	alignment.html#alignCenter,openArray[string],string,string	alignment: alignCenter(lines: openArray[string]; pad = &quot; &quot;; halfPad = &quot; &quot;; width = -1): seq[\n    string]	
-alignRight	alignment.html#alignRight,openArray[string],string,string	alignment: alignRight(lines: openArray[string]; pad = &quot; &quot;; halfPad = &quot; &quot;; width = -1): seq[\n    string]	
+alignLeft	alignment.html#alignLeft,openArray[string],string,string,int	alignment: alignLeft(lines: openArray[string]; pad = &quot; &quot;; halfPad = &quot; &quot;; width = -1;\n          additionalPadWidth = 0): seq[string]	
+alignCenter	alignment.html#alignCenter,openArray[string],string,string,int	alignment: alignCenter(lines: openArray[string]; pad = &quot; &quot;; halfPad = &quot; &quot;; width = -1;\n            additionalPadWidth = 0): seq[string]	
+alignRight	alignment.html#alignRight,openArray[string],string,string,int	alignment: alignRight(lines: openArray[string]; pad = &quot; &quot;; halfPad = &quot; &quot;; width = -1;\n           additionalPadWidth = 0): seq[string]	
