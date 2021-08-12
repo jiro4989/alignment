@@ -55,6 +55,22 @@ suite "alignLeft":
       "Hello     ",
       "1         ",
       ]
+  test "Additional pad width":
+    check @["Hello", "こんにちは"].alignLeft(additionalPadWidth = 10,
+        pad = " ") == @[
+      "Hello               ",
+      "こんにちは          ",
+      ]
+    check @["Hello", "こんにちは"].alignLeft(additionalPadWidth = 10,
+        pad = "　") == @[
+      "Hello 　　　　　　　",
+      "こんにちは　　　　　",
+      ]
+    check @["Hello", "こんにちは"].alignLeft(additionalPadWidth = 10,
+        pad = "あ") == @[
+      "Hello あああああああ",
+      "こんにちはあああああ",
+      ]
   test "Pad = x":
     check @["Hello1", "こんにちは"].alignLeft(pad = "x") == @[
       "Hello1xxxx",
@@ -153,6 +169,17 @@ suite "alignCenter":
       "  Hello   ",
       "こんにちは",
       ]
+  test "Additional pad width":
+    check @["Hello", "こんにちは"].alignCenter(additionalPadWidth = 10,
+        pad = " ") == @[
+      "       Hello        ",
+      "     こんにちは     ",
+      ]
+    check @["Hello", "こんにちは"].alignCenter(additionalPadWidth = 10,
+        pad = "あ") == @[
+      "あああ Hello  あああ",
+      "ああ こんにちは ああ",
+      ]
   test "Pad = x":
     check @["Hello1", "こんにちは"].alignCenter(pad = "x") == @[
       "xxHello1xx",
@@ -241,6 +268,22 @@ suite "alignRight":
       "こんにちは",
       "     Hello",
       "         1",
+      ]
+  test "Additional pad width":
+    check @["Hello", "こんにちは"].alignRight(additionalPadWidth = 10,
+        pad = " ") == @[
+      "               Hello",
+      "          こんにちは",
+      ]
+    check @["Hello", "こんにちは"].alignRight(additionalPadWidth = 10,
+        pad = "　") == @[
+      "　　　　　　　 Hello",
+      "　　　　　こんにちは",
+      ]
+    check @["Hello", "こんにちは"].alignRight(additionalPadWidth = 10,
+        pad = "あ") == @[
+      "あああああああ Hello",
+      "あああああこんにちは",
       ]
   test "Pad = x":
     check @["Hello1", "こんにちは"].alignRight(pad = "x") == @[
